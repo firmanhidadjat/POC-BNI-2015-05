@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+    <property name="brokerURL" value="tcp://localhost:61616"/>
+	<property name="userName" value="seno"/>
+	<property name="password" value="dodol123"/>
+  </bean>
+
+  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="websocket://0.0.0.0:9191/fileTransfer2"/>
+        <bean ref="id.co.hanoman.h2hpajak.WebSocketHelper" method="msg"/>
+        <to uri="websocket://0.0.0.0:9191/fileTransfer2"/>
+    </route>
+</camelContext>
+
+</beans>

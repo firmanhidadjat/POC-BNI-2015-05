@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+       
+  <cxf:cxfEndpoint id="countriesProxy"
+    address="http://localhost:9000/countriesProxy">
+    <cxf:properties>
+      <entry key="relayHeaders" value="true"/>
+      <entry key="dataFormat" value="MESSAGE"/>
+    </cxf:properties>
+  </cxf:cxfEndpoint>
+  
+  <cxf:cxfEndpoint id="countriesService"
+    address="http://localhost:8080/ws/countries.wsdl"
+    endpointName="s:CountriesPortSoap11"
+    serviceName="s:CountriesPortService"
+    xmlns:s="http://spring.io/guides/gs-producing-web-service">
+    <cxf:properties>
+      <entry key="dataFormat" value="MESSAGE"/>
+    </cxf:properties>
+  </cxf:cxfEndpoint>
+  
+  <camel:keyStoreParameters id="signatureParams" resource="../keys/client.jks" password="dodolduren123" />
+  
+  <bean id="signatureAccessor" class="org.apache.camel.component.xmlsecurity.api.DefaultKeyAccessor">
+    <property name="alias" value="client"/>
+    <property name="password" value="dodolduren123"/>
+    <property name="keyStoreParameters" ref="signatureParams"/>
+  </bean>
+  
+  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="cxf:bean:countriesProxy"/>
+        <bean ref="id.co.hanoman.h2hpajak.WebServiceHelper" method="log"/>
+        <!-- bean ref="id.co.hanoman.h2hpajak.WebServiceHelper" method="sign"/>
+        <bean ref="id.co.hanoman.h2hpajak.WebServiceHelper" method="log"/  -->
+        <bean ref="id.co.hanoman.h2hpajak.WebServiceHelper" method="verify"/>
+        <bean ref="id.co.hanoman.h2hpajak.WebServiceHelper" method="log"/>
+        <to uri="cxf:bean:countriesService"/>
+        <bean ref="id.co.hanoman.h2hpajak.WebServiceHelper" method="log"/>
+    </route>
+  </camelContext>
+
+</beans>

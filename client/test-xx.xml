@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+<SOAP-ENV:Header>
+<SOAP-SEC:Signature xmlns:SOAP-SEC="http://schemas.xmlsoap.org/soap/security/2000-12"/>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/>
+<ds:Reference URI="#Body">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>9x0mZhajy9dHKuIXh7bm0khuC7M=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>SiJk1k9GCv40z0fjGC2hKK2VegN4MC8rr41crJUI78ZsqBadqejWrQ==</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:DSAKeyValue>
+<ds:P>/X9TgR11EilS30qcLuzk5/YRt1I870QAwx4/gLZRJmlFXUAiUftZPY1Y+r/F9bow9subVWzXgTuA
+HTRv8mZgt2uZUKWkn5/oBHsQIsJPu6nX/rfGG/g7V+fGqKYVDwT7g/bTxR7DAjVUE1oWkTL2dfOu
+K2HXKu/yIgMZndFIAcc=</ds:P>
+<ds:Q>l2BQjxUjC8yykrmCouuEC/BYHPU=</ds:Q>
+<ds:G>9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3
+zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKL
+Zl6Ae1UlZAFMO/7PSSo=</ds:G>
+<ds:Y>ci3xtUFTAKmjLvwOYRZcT7SB/LU6+HKBdPvFsXXSF95tUbmoYlCUC5N96KCpbU16XV/hkAFEzh43
+zgrkL73Aeu7g9cqpMblDSAFnYJ7IptMz3UCVcv5iAaBg2jIZ4LzffH1kZlb0RBK5P1O++dv9eOks
+iMT4dEq+Yyy6XapZTxA=</ds:Y>
+</ds:DSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+</ds:Signature>
+</SOAP-ENV:Header>
+<SOAP-ENV:Body xmlns:SOAP-SEC="http://schemas.xmlsoap.org/soap/security/2000-12" SOAP-SEC:id="Body">
+<z:FooBar xmlns:z="http://example.com"/>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

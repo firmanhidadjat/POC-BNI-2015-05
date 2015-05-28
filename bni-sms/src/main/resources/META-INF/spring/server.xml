@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/cxf
+       http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+	<bean id="connInfo" class="id.co.hanoman.bni.sms.ConnectionInfo" />
+	<bean id="nullDecoder" class="id.co.hanoman.bni.sms.NullDecoder" />
+	<bean id="nullEncoder" class="id.co.hanoman.bni.sms.NullEncoder" />
+
+	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+		<property name="URL" value="jdbc:oracle:thin:@192.168.68.103:1579/gwdev" />
+		<property name="user" value="ugw" />
+		<property name="password" value="ugw" />
+	</bean>
+
+	<bean id="dbpool" class="id.co.hanoman.bni.sms.DBPool" />
+	<bean id="provider" class="id.co.hanoman.bni.sms.Provider" />
+
+	<!-- from uri="netty:tcp://localhost:5050?decoders=#connInfo,#nullDecoder&amp;encoders=#nullEncoder&amp;sync=true&amp;disconnect=true"/ -->
+	<!-- bean ref="provider" method="sendSMS"/ --><camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+  <route>
+    <from uri="hanoman:pool?runtime=#dbpool"/>
+    <to uri="log:cameltest?showAll=true&amp;multiline=true&amp;level=INFO"/>
+    <to uri="cxf:bean:POCBNI?defaultOperationName=sendSMS"/>
+  </route>
+</camelContext>
+
+	<cxf:cxfEndpoint id="POCBNI"
+		address="http://172.18.1.67:7001/BNIWSTest" serviceClass="com.bni.echo.WSTest" />
+
+</beans>

@@ -1,0 +1,21 @@
+<codex id="bancs">
+	<field id="header.magiccode" type="string" length="1" />
+	<field id="header.packet_length" type="groupLength" length="4"/>
+	<field id="header.filler 1a" type="string" padding-mode="right" padding-char=" " length="4" />
+	<field id="header.data length" type="string" padding-mode="left" padding-char="0" length="4" />
+	<field id="header.filler 1b" type="string" padding-mode="right" padding-char=" " length="12" />
+	<field id="header.sequence number" type="string" padding-mode="right" padding-char=" " length="4" />
+	<field id="header.filler 2" padding-mode="right" padding-char=" " type="string" length="4" />
+	<field id="header.host terminal" type="string" length="6" />
+	<field id="header.institution number" type="string" length="3" />
+	<field id="header.branch" type="string" length="4" />
+	<field id="header.terminal" type="string" length="3" />
+	<field id="header.teller" type="string" length="5" />
+	<field id="header.transaction code" type="string" length="6" />
+	<field id="header.host journal" type="string" length="6" />
+	<field id="header.date" type="string" length="8" />
+	<field id="header.flag" type="string" length="4" />
+	<field id="header.filler 4" padding-mode="right" padding-char=" " type="string" length="1" />
+	<field id="header.supervisor id" type="string" length="6" />
+	<field id="header.filler 5" padding-mode="right" padding-char=" " type="string" length="2" />
+</codex>

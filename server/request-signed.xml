@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">
+   <soapenv:Header><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#Body"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>kzmqihV5YfYZxtr2EN1dseyPo40=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>R7PEsyukkHjDsHk4jcDk+vrVvuX8mAVz7h/IRpgyWj/G5tFHo2kZrz00gA/6gDeu1tB//zCE6uXi
+aQLZOUj0AaRyHllE814pnUQJznOYYPmtXhPrcEB/jMiTqpW3i7bXqr2DE3kan8RIRkBLsbL42wLl
+HGGZDBqYFFguhKVA7AE5OM/4FJn1k1AYUACqReSSQBuZKJsVvXv1DYMLBExCNTuRoozKugZYNOji
+RYwxAjSNYegur6Gaw7QgSpp/qGUOKy1CSB28hPpQisF8faUeQGmFOpgJCssapivgo4+MMzWXCH7I
+oxeljQnDAwEjK02/O6N/m6AyRVso9HHtxkDZ2A==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509SubjectName>CN=client.foo.com,OU=IT,O=foo,L=Jakarta,ST=Jakarta,C=ID</ds:X509SubjectName><ds:X509Certificate>MIIDaTCCAlGgAwIBAgIEQ8V5KzANBgkqhkiG9w0BAQsFADBlMQswCQYDVQQGEwJJRDEQMA4GA1UE
+CBMHSmFrYXJ0YTEQMA4GA1UEBxMHSmFrYXJ0YTEMMAoGA1UEChMDZm9vMQswCQYDVQQLEwJJVDEX
+MBUGA1UEAxMOY2xpZW50LmZvby5jb20wHhcNMTUwMzA3MTQzMjEwWhcNMTYwMzAxMTQzMjEwWjBl
+MQswCQYDVQQGEwJJRDEQMA4GA1UECBMHSmFrYXJ0YTEQMA4GA1UEBxMHSmFrYXJ0YTEMMAoGA1UE
+ChMDZm9vMQswCQYDVQQLEwJJVDEXMBUGA1UEAxMOY2xpZW50LmZvby5jb20wggEiMA0GCSqGSIb3
+DQEBAQUAA4IBDwAwggEKAoIBAQCbOB8wvuZq/6PDcC5ZsNnTK71b+JNWF4j3IAqhI1jFVYdP8Usg
+4qNQBHWFR6M+OhCrh/+SE0Vb+L/qkqZ4UUJq67GfV0R9ZzfRbv2WP5k8O0g9CR06tJmBiGhYMwHX
+eyAmLr5x4RuII3BqbTZBNqYwwNVN9wQS7ExJr5o9GqypzzLxIeHAm4lZ/XhUoL2Yd/uuJdcwdckp
+4edyZ78V1Kzseg7OFVkylUKk2xNg8XSrrVlRaUy7RIn8eRwQ/sIcM6vumsYbVPwRqXB6bWCQ7jWQ
+aSX2oZ1idB4amn6utxIZ1+vqSouwFA5JfGEFO55dRQLgVuODBS4hJvacBMHg8zWHAgMBAAGjITAf
+MB0GA1UdDgQWBBRxGe5NjMbJoMyUUpcEeasGBq0ASzANBgkqhkiG9w0BAQsFAAOCAQEAmyUDSc4z
+Ji5vJ4xO+udvtZOGTbBNRTF4DO0K+MYkeAEQZJCOMRsiy5Ya3retmKC0/B9mcY/yyQrO9Q4lyse2
+Qr/hapHm2agbfBRh3asJ9QbDsF/Gg0b8oDvUtH6XsN+lkAnppDf9TMwybtyHeSCAeh/MuY9dN9H7
+rCoMj32z39giPqFe6KqACIQLiicJdiscX7z57q7LCCPEbxx4UPjSmsPGfyV75OFxHpdvJgcGaHJT
+tBwNf9rcXgz5p0/VI9wTJsTH5UWzwXSBFrb3gkTo8TU4Vw988VbbRXGkffOeBK5ueW76p9+yxewS
+QvIJcVL/cy1PLRZkbVI1VgcOo87B4Q==</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></soapenv:Header>
+   <soapenv:Body xmlns:soap-sec="http://schemas.xmlsoap.org/soap/security/2000-12" soap-sec:id="Body">
+      <gs:getCountryRequest>
+         <gs:name>Spain</gs:name>
+      </gs:getCountryRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
