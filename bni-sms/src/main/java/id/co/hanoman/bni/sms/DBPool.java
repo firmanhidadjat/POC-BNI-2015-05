@@ -1,9 +1,10 @@
 package id.co.hanoman.bni.sms;
 
-import id.co.hanoman.camel.dbpool.PollConsumer;
-import id.co.hanoman.camel.dbpool.PollRuntime;
+import id.co.hanoman.camel.poll.PollConsumer;
+import id.co.hanoman.camel.poll.PollRuntime;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -32,9 +33,9 @@ public class DBPool implements PollRuntime {
 	public DBPool() {
 		 this.bacaFile();
 	}
-
+	
 	@Override
-	public int pool(CamelContext ctx, PollConsumer consumer) {
+	public int poll(CamelContext ctx, PollConsumer consumer) {
 		PreparedStatement ps = null, ps1 = null;
 		ResultSet rs = null;
 		try {
@@ -89,10 +90,12 @@ public class DBPool implements PollRuntime {
 			for (PushSMS obj : data.values()) {
 				try {
 					Exchange exchange = consumer.getEndpoint().createExchange();
+					exchange.setProperty("pushSMS", obj);
 					exchange.getIn().setBody(
 							new String[] { namaServer, String.valueOf(obj.getId()),
 									obj.getNotelp(), obj.getPesan() });
 					consumer.getProcessor().process(exchange);
+					if (exchange.getException() != null) throw exchange.getException();
 					MessageContentsList res = (MessageContentsList) exchange
 							.getOut().getBody();
 					if (res == null)
@@ -161,12 +164,16 @@ public class DBPool implements PollRuntime {
 		String stringHasil = "";
 
 		try {
-			String sCurrentLine;
-			br = new BufferedReader(new FileReader(namaFile));
-			while ((sCurrentLine = br.readLine()) != null) {
-				stringHasil = stringHasil + sCurrentLine;
+			File f = new File(namaFile);
+			if (f.isFile()) {
+				String sCurrentLine;
+				br = new BufferedReader(new FileReader(f));
+				while ((sCurrentLine = br.readLine()) != null) {
+					stringHasil = stringHasil + sCurrentLine;
+				}
+			} else {
+				stringHasil = "LOCAL";
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

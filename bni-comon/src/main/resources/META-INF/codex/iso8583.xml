@@ -1,0 +1,133 @@
+<codex>
+	<field decimal-format="binary" id="packetLength" length="2" type="groupLengthBinary" />
+	<field id="messageType" length="4" padding-char=" " padding-mode="right" type="string" />
+	<field id="bitmap" type="bitmap">
+		<field bit="2" format="llvar" id="primaryAccountNumber" length="19" type="string" />
+		<field bit="3" id="processingCode" length="6" type="string" />
+		<field bit="4" id="amountTransaction" length="12" padding-char="0" padding-mode="left" type="string" />
+		<field bit="5" id="amountSettlement" length="18" padding-char="0" padding-mode="left" type="string" />
+		<field bit="6" id="amountCardholderBilling" length="18" padding-char="0" padding-mode="left" type="string" />
+		<field bit="7" id="transmissionDateTime" length="10" type="string" />
+		<field bit="8" id="amountCardholderBillingFee" length="8" padding-char="0" padding-mode="left" type="string" />
+		<field bit="9" id="conversionRateSettlement" length="8" padding-char="0" padding-mode="left" type="string" />
+		<field bit="10" id="conversionRateCardholderBilling" length="8" padding-char="0" padding-mode="left" type="string" />
+		<field bit="11" id="systemsTraceAuditNumber" length="6" type="string" />
+		<field bit="12" id="timeLocalTransaction" length="6" type="string" />
+		<field bit="13" id="dateLocalTransaction" length="4" type="string" />
+		<field bit="14" id="dateExpiration" length="4" type="string" />
+		<field bit="15" id="dateSettlement" length="4" type="string" />
+		<field bit="16" id="dateConversion" length="4" type="string" />
+		<field bit="17" id="dateCapture" length="4" type="string" />
+		<field bit="18" id="merchantType" length="4" padding-char="0" padding-mode="left" type="string" />
+		<field bit="19" id="acquiringInstitutionCountryCode" length="3" padding-char="0" padding-mode="left" type="string" />
+		<field bit="20" id="panExtendedCountryCode" length="3" padding-char="0" padding-mode="left" type="string" />
+		<field bit="21" id="forwardingInstitutionCountryCode" length="3" padding-char="0" padding-mode="left" type="string" />
+		<field bit="22" id="pointOfServiceEntryMode" length="3" padding-char="0" padding-mode="left" type="string" />
+		<field bit="23" id="applicationPanNumber" length="3" padding-char="0" padding-mode="left" type="string" />
+		<field bit="24" id="networkInternationalIdentifier" length="3" padding-char="0" padding-mode="left" type="string" />
+		<field bit="25" id="pointOfServiceConditionCode" length="2" padding-char="0" padding-mode="left" type="string" />
+		<field bit="26" id="pointOfServiceCaptureCode" length="2" padding-char="0" padding-mode="left" type="string" />
+		<field bit="27" id="authorisingIdentificationResponseLength" length="1" padding-char="0" padding-mode="left" type="string" />
+		<field bit="28" id="amountTransactionFee" length="9" padding-char="0" padding-mode="left" type="string" />
+		<field bit="29" id="amountSettlementFee" length="9" padding-char="0" padding-mode="left" type="string" />
+		<field bit="30" id="amountTransactionProcessingFee" length="9" padding-char="0" padding-mode="left" type="string" />
+		<field bit="31" id="amountSettlementProcessingFee" length="9" padding-char="0" padding-mode="left" type="string" />
+		<field bit="32" format="llvar" id="acquiringInstitutionIdentificationCode" length="11" type="string" />
+		<field bit="33" format="llvar" id="forwardingInstitutionIdentificationCode" length="11" type="string" />
+		<field bit="34" format="llvar" id="primaryAccountNumberExtended" length="28" type="string" />
+		<field bit="35" format="llvar" id="track2Data" length="37" type="string" />
+		<field bit="36" format="lllvar" id="track3Data" length="104" type="string" />
+		<field bit="37" id="retrievalReferenceNumber" length="12" type="string" />
+		<field bit="38" id="authorisationIdentificationResponse" length="6" type="string" />
+		<field bit="39" id="responseCode" length="2" padding-mode="left" type="string" />
+		<field bit="40" id="serviceRestrictionCode" length="3" type="string" />
+		<field bit="41" id="cardAcceptorTerminalIdentification" length="8" type="string" />
+		<field bit="42" id="cardAcceptorIdentificationCode" length="15" type="string" />
+		<field bit="43" id="cardAcceptorName" length="40" type="string" />
+		<field bit="44" format="llvar" id="additionalResponseData" length="25" type="string" />
+		<field bit="45" format="llvar" id="track1Data" length="76" type="string" />
+		<field bit="46" format="lllvar" id="additionalDataIso" length="999" type="string" />
+		<field bit="47" format="lllvar" id="additionalDataNational" length="999" type="string" />
+		<field bit="48" format="lllvar" id="additionalDataPrivate" length="999" type="string" />
+		<field bit="49" id="currencyCodeTransaction" length="3" type="string" />
+		<field bit="50" id="currencyCodeSettlement" length="3" type="string" />
+		<field bit="51" id="currencyCodeCardholderBilling" length="3" type="string" />
+		<field bit="52" id="personalIdentificationNumberData" length="16" type="string" />
+		<field bit="53" id="securityRelatedControlInformation" length="18" padding-char="0" padding-mode="left" type="string" />
+		<field bit="54" format="lllvar" id="additionalAmounts" length="999" type="string" />
+		<field bit="55" format="lllvar" id="reservedIso1" length="999" type="string" />
+		<field bit="56" format="lllvar" id="reservedIso2" length="999" type="string" />
+		<field bit="57" format="lllvar" id="reservedNational1" length="999" type="string" />
+		<field bit="58" format="lllvar" id="reservedNational2" length="999" type="string" />
+		<field bit="59" format="lllvar" id="reservedNational3" length="999" type="string" />
+		<field bit="60" format="lllvar" id="reasonCode" length="999" type="string" />
+		<field bit="61" format="lllvar" id="reservedPrivate1" length="999" type="string" />
+		<field bit="62" format="lllvar" id="reservedPrivate2" length="999" type="string" />
+		<field bit="63" format="lllvar" id="reservedPrivate3" length="999" type="string" />
+		<field bit="64" id="messageAuthenticationCode" length="16" type="string" />
+		<field bit="65" id="bitMapTertiary" length="16" type="string" />
+		<field bit="66" id="settlementCode" length="1" padding-char="0" padding-mode="left" type="string" />
+		<field bit="67" id="extendedPaymentCode" length="2" padding-char="0" padding-mode="left" type="string" />
+		<field bit="68" id="receivingInstitutionCountryCode" length="3" type="string" />
+		<field bit="69" id="settlementInstitutionCountyCode" length="3" type="string" />
+		<field bit="70" id="networkManagementInformationCode" length="3" type="string" />
+		<field bit="71" id="messageNumber" length="4" padding-char="0" padding-mode="left" type="string" />
+		<field bit="72" id="messageNumberLast" length="4" padding-char="0" padding-mode="left" type="string" />
+		<field bit="73" id="dateAction" length="6" type="string" />
+		<field bit="74" id="creditsNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="75" id="creditsReversalNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="76" id="debitsNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="77" id="debitsReversalNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="78" id="transferNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="79" id="transferReversalNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="80" id="inquiriesNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="81" id="authorisationsNumber" length="10" padding-char="0" padding-mode="left" type="string" />
+		<field bit="82" id="creditsProcesssingFeeAmount" length="14" padding-char="0" padding-mode="left" type="string" />
+		<field bit="83" id="creditsTransactionFeeAmount" length="14" padding-char="0" padding-mode="left" type="string" />
+		<field bit="84" id="debitsProcessingFeeAmount" length="14" padding-char="0" padding-mode="left" type="string" />
+		<field bit="85" id="debitsTransactionFeeAmount" length="14" padding-char="0" padding-mode="left" type="string" />
+		<field bit="86" id="creditsAmount" length="15" padding-char="0" padding-mode="left" type="string" />
+		<field bit="87" id="creditsReversalAmount" length="15" padding-char="0" padding-mode="left" type="string" />
+		<field bit="88" id="debitsAmount" length="15" padding-char="0" padding-mode="left" type="string" />
+		<field bit="89" id="debitsReversalAmount" length="15" padding-char="0" padding-mode="left" type="string" />
+		<field bit="90" id="originalDataElements" length="42" padding-mode="left" type="string" />
+		<field bit="91" id="fileUpdateCode" length="1" type="string" />
+		<field bit="92" id="fileSecurityCode" length="2" padding-char="0" padding-mode="left" type="string" />
+		<field bit="93" id="responseIndicator" length="5" padding-char="0" padding-mode="left" type="string" />
+		<field bit="94" id="serviceIndicator" length="7" type="string" />
+		<field bit="95" id="replacementAmounts" length="42" type="string" />
+		<field bit="96" id="messageSecurityCode" length="8" type="string" />
+		<field bit="97" id="amountNetSettlement" length="16" padding-char="0" padding-mode="left" type="string" />
+		<field bit="98" id="payee" length="25" type="string" />
+		<field bit="99" format="llvar" id="settlementInstitutionIdentificationCode" length="11" type="string" />
+		<field bit="100" format="llvar" id="receivingInstitutionIdentificationCode" length="11" type="string" />
+		<field bit="101" format="llvar" id="slipNumber" length="11" type="string" />
+		<field bit="102" format="llvar" id="fromAccount" length="28" type="string" />
+		<field bit="103" format="llvar" id="toAccount" length="28" type="string" />
+		<field bit="104" format="lllvar" id="transactionDescription" length="100" type="string" />
+		<field bit="105" format="lllvar" id="reservedForIsoUse1" length="999" type="string" />
+		<field bit="106" format="lllvar" id="reservedForIsoUse2" length="999" type="string" />
+		<field bit="107" format="lllvar" id="reservedForIsoUse3" length="999" type="string" />
+		<field bit="108" format="lllvar" id="reservedForIsoUse4" length="999" type="string" />
+		<field bit="109" format="lllvar" id="reservedForIsoUse5" length="999" type="string" />
+		<field bit="110" format="lllvar" id="reservedForIsoUse6" length="999" type="string" />
+		<field bit="111" format="lllvar" id="reservedForIsoUse7" length="999" type="string" />
+		<field bit="112" format="lllvar" id="reservedForNationalUse" length="999" type="string" />
+		<field bit="113" format="llvar" id="authorisingAgentInstitutionIdCode" length="11" type="string" />
+		<field bit="114" format="lllvar" id="reservedForNationalUse1" length="999" type="string" />
+		<field bit="115" format="lllvar" id="reservedForNationalUse2" length="999" type="string" />
+		<field bit="116" format="lllvar" id="reservedForNationalUse3" length="999" type="string" />
+		<field bit="117" format="lllvar" id="reservedForNationalUse4" length="999" type="string" />
+		<field bit="118" format="lllvar" id="reservedForNationalUse5" length="999" type="string" />
+		<field bit="119" format="lllvar" id="reservedForNationalUse6" length="999" type="string" />
+		<field bit="120" format="lllvar" id="reservedForPrivateUse1" length="999" type="string" />
+		<field bit="121" format="lllvar" id="reservedForPrivateUse2" length="999" type="string" />
+		<field bit="122" format="lllvar" id="reservedForPrivateUse3" length="999" type="string" />
+		<field bit="123" format="lllvar" id="reservedForPrivateUse4" length="999" type="string" />
+		<field bit="124" format="lllvar" id="infoText" length="255" type="string" />
+		<field bit="125" format="lllvar" id="networkManagementInformation" length="50" type="string" />
+		<field bit="126" format="lllvar" id="issuerTraceId" length="6" type="string" />
+		<field bit="127" format="lllvar" id="reservedForPrivateUse" length="11" type="string" />
+		<field bit="128" id="messageAuthenticationCode2" length="16" type="string" />
+	</field>
+</codex>

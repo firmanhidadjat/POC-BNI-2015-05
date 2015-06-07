@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:camel="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="connInfo" class="id.co.hanoman.netty.ConnectionInfo" />
+
+	<bean id="codexFactory" class="id.co.hanoman.codex.ResourceCodexFactory" />
+
+	<bean id="valueHandler" class="id.co.hanoman.codex.PojoValueHandler">
+		<constructor-arg index="0" value="#{codexFactory}" />
+	</bean>
+
+	<bean id="bancsReqCodex" class="id.co.hanoman.codex.netty.NettyCodex">
+		<property name="codexFactory" value="#{codexFactory}" />
+		<property name="codex" value="bancs-req" />
+		<property name="valueHandler" value="#{valueHandler}" />
+	</bean>
+
+	<bean id="bancsRespCodex" class="id.co.hanoman.codex.netty.NettyCodex">
+		<property name="codexFactory" value="#{codexFactory}" />
+		<property name="codex" value="bancs-resp" />
+		<property name="valueHandler" value="#{valueHandler}" />
+	</bean>
+	
+	<bean id="codexHelper" class="id.co.hanoman.bni.sms.CodexHelper">
+		<property name="codexFactory" value="#{codexFactory}" />
+		<property name="valueHandler" value="#{valueHandler}" />
+		<property name="decode" value="bancs-req" />
+		<property name="encode" value="bancs-resp" />
+	</bean>
+
+	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+		<route>
+			<from uri="file:data/in" />
+			<split streaming="true">
+				<tokenize token="\r\n|\n" xml="false" />
+				<to uri="log:filein?showAll=true&amp;multiline=true&amp;level=INFO" />
+				<bean ref="codexHelper" method="decode" />
+				<setExchangePattern pattern="InOut"/>
+				<to uri="log:corereq?showAll=true&amp;multiline=true&amp;level=INFO" />
+				<to uri="netty:tcp://localhost:5050?decoders=#connInfo,#bancsRespCodex&amp;encoders=#bancsReqCodex&amp;sync=false&amp;disconnect=false" />
+				<to uri="log:corerply?showAll=true&amp;multiline=true&amp;level=INFO" />
+			</split>
+		</route>
+	</camelContext>
+
+</beans>

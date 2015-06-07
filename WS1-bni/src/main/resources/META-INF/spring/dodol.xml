@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+	<cxf:cxfEndpoint id="routerEndpoint"
+		address="http://0.0.0.0:7002/BNIWSServerTest/abc" serviceClass="id.co.hanoman.bni.ws1.WSServerTest" />
+	<bean id="processor" class="id.co.hanoman.bni.ws1.Processor" />
+	<bean id="DBInsert" class="id.co.hanoman.bni.ws1.DBInsert" />
+	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+		<property name="URL" value="jdbc:oracle:thin:@192.168.68.103:1579/gwdev" />
+		<property name="user" value="ugw" />
+		<property name="password" value="ugw" />
+	</bean>
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+		<route>
+			<from uri="cxf:bean:routerEndpoint" />
+			<to uri="log:cameltest?showAll=true&amp;multiline=true&amp;level=INFO"
+				id="log msg" />
+			<!-- <loadBalance> <roundRobin/> <to uri="log:camelxxxx?showAll=true&amp;multiline=true&amp;level=INFO"/> 
+				<to uri="log:camelyyyy?showAll=true&amp;multiline=true&amp;level=INFO"/> 
+				</loadBalance> -->
+			<bean ref="DBInsert" method="insertDB" />
+			<!-- <bean ref="processor" method="dodol" /> -->
+
+		</route>
+	</camelContext>
+</beans>

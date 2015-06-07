@@ -1,0 +1,5 @@
+<codex>
+	<field id="string1" length="4" type="string" />
+	<field id="string2" length="10" type="string" />
+	<field id="string3" length="70" type="string" allow-partial="true" />
+</codex>

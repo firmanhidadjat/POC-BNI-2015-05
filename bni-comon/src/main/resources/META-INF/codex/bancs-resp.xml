@@ -1,0 +1,25 @@
+<codex>
+	<field id="headerMagiccode" length="1" type="string" value=" " />
+	<field id="headerPacketLength" length="4" type="groupLength" base="-1" />
+	<field id="headerFiller1a" length="4" padding-char=" " padding-mode="right" type="string" />
+	<field id="headerDataLength" length="4" type="subcodexLength" subcodex="data" />
+	<field id="headerFiller1b" length="12" padding-char=" " padding-mode="right" type="string" />
+	<field id="headerSequenceNumber" length="4" padding-char=" " padding-mode="right" type="string" />
+	<field id="headerFiller2" length="4" padding-char=" " padding-mode="right" type="string" />
+	<field id="headerHostTerminal" length="6" type="string" />
+	<field id="headerInstitutionNumber" length="3" type="string" />
+	<field id="headerBranch" length="4" type="string" />
+	<field id="headerTerminal" length="3" type="string" />
+	<field id="headerTeller" length="5" type="string" />
+	<field id="headerTransactionCode" length="6" type="string" />
+	<field id="headerHostJournal" length="6" type="string" />
+	<field id="headerDate" length="8" type="string" />
+	<field id="headerFlag" length="4" padding-mode="left" type="string" />
+	<field id="headerFiller4" length="1" padding-char=" " padding-mode="right" type="string" />
+	<field id="headerSupervisorId" length="6" type="string" />
+	<field id="headerFiller5" length="2" padding-char=" " padding-mode="right" type="string" />
+	<field id="headerOutputType" type="string" length="2" />
+
+	<field id="data" field-eval="bancs-resp-${headerTransactionCode}-${headerOutputType}" type="subcodex" />
+</codex>
+

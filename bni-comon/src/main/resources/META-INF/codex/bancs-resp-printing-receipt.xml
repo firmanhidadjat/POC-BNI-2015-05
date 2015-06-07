@@ -1,0 +1,21 @@
+<codex>
+	<field id="accountName" length="58" type="string" padding-char=" " padding-mode="right" />
+	<field id="accountNo" length="20" type="string" padding-char=" " padding-mode="left" />
+	<field id="branchNo" length="4" type="string" />
+	<field id="userNo" length="5" type="string" />
+	<field id="bancsJournalNo" length="6" type="string" />
+	<field id="trxDate" length="8" type="date" date-format="ddMMyyyy" />
+	<field id="trxTime" length="6" type="date" date-format="HHmmss" />
+	<field id="mnumonic" length="4" type="string" />
+	<field id="nominal" length="19" type="bni.printDecimal" />
+	<field id="balance" length="19" type="bni.printDecimal" />
+	<field id="balance2" length="19" type="bni.printDecimal" />
+	<field id="balance2CurrCode" length="3" type="string" padding-char=" " padding-mode="right" />
+	<field id="swiftRef" length="20" type="string" padding-char=" " padding-mode="right" />
+	<field id="baseFca" length="20" type="string" padding-char=" " padding-mode="left" />
+	<field id="txnCurrencyCode" length="3" type="string" />
+	<field id="exchangeRate" length="6" type="string" />
+	<field id="branchName" length="30" type="string" padding-char=" " padding-mode="right" />
+	<field id="txnDescription" length="20" padding-char=" " padding-mode="right" type="string" />
+</codex>
+

@@ -1,0 +1,24 @@
+<codex>
+	<field id="prefix" length="1" type="string" />
+	<field id="branchNo" length="4" type="string" />
+	<field id="glCode" length="3" type="string" />
+	<field id="glAccountNo" length="9" type="string" />
+	<field id="nominal" length="18" type="bni.signedDecimal" />
+	<field id="filler1" length="12" padding-char=" " padding-mode="right" type="string" />
+	<field id="glAccountName" length="30" padding-char=" " padding-mode="right" type="string" />
+	<field id="filler2" length="38" padding-char=" " padding-mode="right" type="string" />
+	<field id="promo" length="2" type="string" padding-char=" " padding-mode="right" />
+	<field id="filler3" length="34" padding-char=" " padding-mode="right" type="string" />
+	<field id="currencyTrx" length="3" type="string" />
+	<field id="nominalTrx" length="18" type="bni.signedDecimal" />
+	<field id="currencyBase" length="3" type="string" />
+	<field id="nominalBase" length="18" type="bni.signedDecimal" />
+	<field id="commission" length="18" type="bni.signedDecimal" />
+	<field id="change" length="18" type="bni.signedDecimal" />
+	<field id="rateType" length="2" type="string" />
+	<field id="filler4" length="375" padding-char=" " padding-mode="right" type="string" />
+	<field id="description" length="30" type="string" padding-char=" " padding-mode="right" />
+	<field id="uraian1" length="20" type="string" padding-char=" " padding-mode="right" />
+	<field id="uraian2" length="30" type="string" padding-char=" " padding-mode="right" />
+</codex>
+

@@ -9,10 +9,6 @@
        http://camel.apache.org/schema/cxf
        http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
-	<bean id="connInfo" class="id.co.hanoman.bni.sms.ConnectionInfo" />
-	<bean id="nullDecoder" class="id.co.hanoman.bni.sms.NullDecoder" />
-	<bean id="nullEncoder" class="id.co.hanoman.bni.sms.NullEncoder" />
-
 	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
 		<property name="URL" value="jdbc:oracle:thin:@192.168.68.103:1579/gwdev" />
 		<property name="user" value="ugw" />
@@ -22,16 +18,55 @@
 	<bean id="dbpool" class="id.co.hanoman.bni.sms.DBPool" />
 	<bean id="provider" class="id.co.hanoman.bni.sms.Provider" />
 
+	<bean id="connInfo" class="id.co.hanoman.netty.ConnectionInfo" />
+
+	<!-- bean id="codexFactory" class="id.co.hanoman.codex.FileCodexFactory">
+		<constructor-arg value="file:///home/devadm/codex"/>
+	</bean -->
+	
+	<bean id="codexFactory" class="id.co.hanoman.codex.ResourceCodexFactory">
+	</bean>
+
+	<bean id="valueHandler" class="id.co.hanoman.codex.PojoValueHandler">
+		<constructor-arg index="0" value="#{codexFactory}" />
+	</bean>
+
+	<bean id="bancsReqCodex" class="id.co.hanoman.codex.netty.NettyCodex">
+		<property name="codexFactory" value="#{codexFactory}" />
+		<property name="codex" value="bancs-req" />
+		<property name="valueHandler" value="#{valueHandler}" />
+	</bean>
+
+	<bean id="bancsRespCodex" class="id.co.hanoman.codex.netty.NettyCodex">
+		<property name="codexFactory" value="#{codexFactory}" />
+		<property name="codex" value="bancs-resp" />
+		<property name="valueHandler" value="#{valueHandler}" />
+	</bean>
+
+	<bean id="codexHelper" class="id.co.hanoman.bni.sms.CodexHelper">
+		<property name="codexFactory" value="#{codexFactory}" />
+		<property name="valueHandler" value="#{valueHandler}" />
+		<property name="decode" value="bancs-req" />
+		<property name="encode" value="bancs-resp" />
+	</bean>
+
+
 	<!-- from uri="netty:tcp://localhost:5050?decoders=#connInfo,#nullDecoder&amp;encoders=#nullEncoder&amp;sync=true&amp;disconnect=true"/ -->
-	<!-- bean ref="provider" method="sendSMS"/ --><camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+	<!-- bean ref="provider" method="sendSMS"/ -->
+	<camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
   <route>
-    <from uri="hanoman:pool?runtime=#dbpool"/>
-    <to uri="log:cameltest?showAll=true&amp;multiline=true&amp;level=INFO"/>
-    <to uri="cxf:bean:POCBNI?defaultOperationName=sendSMS"/>
+    <from uri="hanoman:poll?runtime=#dbpool" id="database poll">
+      <description/>
+    </from>
+    <to uri="log:cameltest?showAll=true&amp;multiline=true&amp;level=INFO" id="log msg"/>
+    <bean ref="codexHelper" method="composeCoreReq" id="core request"/>
+    <to uri="netty:tcp://172.18.1.67:5050?decoders=#connInfo,#bancsRespCodex&amp;encoders=#bancsReqCodex&amp;sync=true&amp;disconnect=true" id="send core"/>
+    <bean ref="codexHelper" method="processCoreReply" id="process reply"/>
+    <to uri="cxf:bean:POCBNI?defaultOperationName=sendSMS" id="call biller service"/>
   </route>
 </camelContext>
 
-	<cxf:cxfEndpoint id="POCBNI"
-		address="http://172.18.1.67:7001/BNIWSTest" serviceClass="com.bni.echo.WSTest" />
+	<cxf:cxfEndpoint id="POCBNI" address="http://172.18.1.67:7001/BNIWSTest"
+		serviceClass="com.bni.echo.WSTest" />
 
 </beans>

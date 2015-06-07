@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+	<!-- <cxf:cxfEndpoint id="routerEndpoint"
+		address="http://0.0.0.0:7002/BNIWSServerTest/abc" serviceClass="id.co.hanoman.bni.ws1.WSServerTest" /> -->
+
+
+	<!-- <bean ref="processor" method="dodol" /> -->
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+  <route>
+    <from uri="jetty:http://0.0.0.0:7003/BNIWSServerTest/abc?matchOnUriPrefix=true"/>
+    <to uri="log:cameltest?showAll=true&amp;multiline=true&amp;level=INFO" id="log msg"/>
+    <loadBalance>
+      <roundRobin/>
+      <to uri="jetty:http://172.18.0.181:7002/BNIWSServerTest/abc?bridgeEndpoint=true&amp;thorwExceptionOnFailure=false"/> 
+      <to uri="jetty:http://172.18.0.182:7002/BNIWSServerTest/abc?bridgeEndpoint=true&amp;thorwExceptionOnFailure=false"/> 
+    </loadBalance>
+  </route>
+</camelContext>
+</beans>

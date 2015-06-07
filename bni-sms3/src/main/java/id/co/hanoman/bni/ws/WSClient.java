@@ -16,7 +16,8 @@ public class WSClient {
 
 	public void dodol(Exchange d) {
 		List<List<String>> dd = (List<List<String>>) d.getIn().getBody();
-		// LOG.info("GGGG " + dd.get(0).get(0) + " " + dd.get(0).get(1) + " "
+
+//		LOG.info("GGGGGGGGG " + U.dump(d.getIn().getBody()));
 		// + dd.get(0).get(2) + " " + dd.get(0).get(3) + " "
 		// + dd.get(0).get(4) + " " + dd.get(0).get(5) + " "
 		// + dd.get(0).get(6));
